@@ -1,7 +1,6 @@
 const prompt = require("prompt-sync")();
 
-const bet = prompt("Please put your bet: ");
-console.log(`You have ${bet} bahts.`,'\n');
+
 
 const shuffle = () => {
     let numbers = []; 
@@ -47,25 +46,53 @@ const isCard = (numbers) => {
 };
 
 const scoring = (numbers) => {
-    score = 0
+    let score = 0
     for (let i = 0; i < numbers.length; i++ ){
-        if (numbers[i] <= 9){
-            score += numbers[i]
+        let num = numbers[i]%13;
+        if (num <= 9){
+            score += num;
         }else{
             score += 0
         }
     }
-    return score
+    return score%10
 }
 
-const showScores = (numbers) => {
+const showScores = (numbers,bet) => {
     let player = scoring(numbers.slice(0,2))
     let dealer = scoring(numbers.slice(2,4))
+    if (player > dealer){
+        return [`You won !!!, received ${bet} chips.`, bet]
+    }else if (player === dealer){
+        return ["You tie !!!, not lost any chips" , 0]
+    }else{
+        return [`You lost !!!, lost ${bet} chips` , 0]
+    }
 }
-// let numbers = shuffle();
-// let cards = isCard(numbers);
-// console.log(numbers)
-// console.log(cards)
+
+const play = () => {
+    let net = 0
+    while(1){
+        const bet = prompt("Please put your bet: ");
+        let numbers = shuffle();
+        let cards = isCard(numbers);
+        console.log(`You got ${cards[0]}, ${cards[1]}`);
+        console.log(`Dealer got ${cards[2]}, ${cards[3]}`);
+        let result = showScores(numbers,bet);
+        console.log(result[0])
+        net += parseInt(result[1]);
+
+        const again = prompt("Wanna play more (Yes/No)? ");
+        if( again.toLowerCase() !== "yes" ){
+            console.log(`You got total ${net} chips`)
+            break;
+        }  
+    }
+}
+
+play()
+
+
 
 
 
