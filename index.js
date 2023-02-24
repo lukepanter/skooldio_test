@@ -1,7 +1,7 @@
+// import prompt-sync for handle user input
 const prompt = require("prompt-sync")();
 
-
-
+// shuffle card (represent in numbers 1 - 52)
 const shuffle = () => {
     let numbers = []; 
     let r, n, p;
@@ -9,7 +9,7 @@ const shuffle = () => {
     let min = 1;
     let max = 52;
 
-    r = 4; // how many numbers you want to extract
+    r = 4; 
 
     for (let i = 0; i < r; i++) {
     do {
@@ -24,6 +24,7 @@ const shuffle = () => {
     return numbers;
 };
 
+// Change from number to text 
 const isCard = (numbers) => {
     const suitDeck = ["spades","hearts","diamonds","clubs"]; 
     const number = ["King","Ace","2","3","4","5","6","7","8","9","10","Jack","Queen"];
@@ -45,6 +46,7 @@ const isCard = (numbers) => {
     return cards
 };
 
+// Calculate total score for each players
 const scoring = (numbers) => {
     let score = 0
     for (let i = 0; i < numbers.length; i++ ){
@@ -58,6 +60,7 @@ const scoring = (numbers) => {
     return score%10
 }
 
+// Justify who won and handle result
 const showScores = (numbers,bet) => {
     let player = scoring(numbers.slice(0,2))
     let dealer = scoring(numbers.slice(2,4))
@@ -70,6 +73,7 @@ const showScores = (numbers,bet) => {
     }
 }
 
+// Main function
 const play = () => {
     let net = 0
     while(1){
