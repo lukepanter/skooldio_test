@@ -27,7 +27,7 @@ const shuffle = () => {
 
 const isCard = (numbers) => {
     const suitDeck = ["spades","hearts","diamonds","clubs"]; 
-    const number = ["Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"];
+    const number = ["King","Ace","2","3","4","5","6","7","8","9","10","Jack","Queen"];
     let cards=[]
     for (let i = 0; i < numbers.length; i++ ){
         result = ""
@@ -46,10 +46,26 @@ const isCard = (numbers) => {
     return cards
 };
 
-let numbers = shuffle();
-let cards = isCard(numbers);
-console.log(numbers)
-console.log(cards)
+const scoring = (numbers) => {
+    score = 0
+    for (let i = 0; i < numbers.length; i++ ){
+        if (numbers[i] <= 9){
+            score += numbers[i]
+        }else{
+            score += 0
+        }
+    }
+    return score
+}
+
+const showScores = (numbers) => {
+    let player = scoring(numbers.slice(0,2))
+    let dealer = scoring(numbers.slice(2,4))
+}
+// let numbers = shuffle();
+// let cards = isCard(numbers);
+// console.log(numbers)
+// console.log(cards)
 
 
 
