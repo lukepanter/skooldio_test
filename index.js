@@ -66,7 +66,7 @@ const showScores = (numbers,bet) => {
     }else if (player === dealer){
         return ["You tie !!!, not lost any chips" , 0]
     }else{
-        return [`You lost !!!, lost ${bet} chips` , 0]
+        return [`You lost !!!, lost ${bet} chips` , -bet]
     }
 }
 
@@ -84,7 +84,12 @@ const play = () => {
 
         const again = prompt("Wanna play more (Yes/No)? ");
         if( again.toLowerCase() !== "yes" ){
-            console.log(`You got total ${net} chips`)
+            if(net >= 0){
+                console.log(`You got total ${net} chips`)
+            }else{
+                console.log(`You lost total ${-net} chips`)
+            }
+            
             break;
         }  
     }
